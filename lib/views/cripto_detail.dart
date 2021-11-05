@@ -32,7 +32,7 @@ class _CryptoDetailState extends State<CryptoDetail> {
       chartData.add(SalesData(DateTime.fromMillisecondsSinceEpoch(widget.chartData.prices![a][0]),widget.chartData.prices![a][1]));
     }
     return Scaffold(
-        backgroundColor: Color.fromRGBO(250, 247, 255, 1.0),
+        backgroundColor: Color.fromRGBO(255, 255, 255, 1.0),
       body:
 
           Container(
@@ -46,13 +46,14 @@ class _CryptoDetailState extends State<CryptoDetail> {
               bottom: 20
             ),
             decoration: BoxDecoration(
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black38,
-                  spreadRadius: 0,
-                  blurRadius: 5
-                ),
-              ],
+                boxShadow: [
+                  BoxShadow(
+                      color: Color.fromRGBO(0, 0, 0, 0.15),
+                      spreadRadius: 0,
+                      blurRadius: 15,
+                      offset: Offset(0.1, 0.4)
+                  ),
+                ],
               color: Colors.white,
               borderRadius: BorderRadius.circular(20)
             ),

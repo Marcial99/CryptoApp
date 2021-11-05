@@ -76,7 +76,7 @@ class _CryptoSearchState extends State<CryptoSearch> {
       chartData.add(SalesData(DateTime.fromMillisecondsSinceEpoch(data[1].prices![a][0]),data[1].prices![a][1]));
     }
     return Scaffold(
-        backgroundColor: Color.fromRGBO(250, 247, 255, 1.0),
+        backgroundColor: Color.fromRGBO(255, 255, 255, 1.0),
         body:
 
         Container(
@@ -92,9 +92,10 @@ class _CryptoSearchState extends State<CryptoSearch> {
           decoration: BoxDecoration(
               boxShadow: [
                 BoxShadow(
-                    color: Colors.black38,
+                    color: Color.fromRGBO(0, 0, 0, 0.15),
                     spreadRadius: 0,
-                    blurRadius: 5
+                    blurRadius: 15,
+                    offset: Offset(0.1, 0.4)
                 ),
               ],
               color: Colors.white,

@@ -40,7 +40,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(250, 247, 255, 1.0),
+      backgroundColor: Color.fromRGBO(255, 255, 255, 1.0),
       body: FutureBuilder(
 
         future: Future.wait([apiGrafica!.getChart('bitcoin'),apiCriptomoneda!.getCripto('bitcoin'),
@@ -92,23 +92,39 @@ class _HomeState extends State<Home> {
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(40),
                   border: Border.all(color: Colors.white12),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black38,
-                      blurRadius: 5,
-                      spreadRadius: 0
-                    )
-                  ]
+                boxShadow: [
+                  BoxShadow(
+                      color: Color.fromRGBO(0, 0, 0, 0.15),
+                      spreadRadius: 0,
+                      blurRadius: 15,
+                      offset: Offset(0.1, 0.4)
+                  ),
+                ],
               ),
               child: TextField(
                 onSubmitted: (value) {
-                  Navigator.push(
-                      context,
-                      PageRouteBuilder(pageBuilder: (context, animation, secondaryAnimation) =>
-                          CryptoSearch(value)
-                          ,
-                          transitionDuration: Duration(milliseconds: 800))
-                  );
+                  if(value==''){
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content:
+                          Text('Ingresa una moneda para buscar',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: 'Ubuntu',
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold
+                            ),),
+                          backgroundColor: Colors.red,));
+                  }else {
+                    Navigator.push(
+                        context,
+                        PageRouteBuilder(pageBuilder: (context, animation,
+                            secondaryAnimation) =>
+                            CryptoSearch(value)
+                            ,
+                            transitionDuration: Duration(milliseconds: 800))
+                    );
+                  }
                 },
                 decoration: InputDecoration(
                     border: InputBorder.none,
@@ -133,9 +149,9 @@ class _HomeState extends State<Home> {
           ),
         ),
         Container(
-            height: 160,
+            height: 170,
             margin: EdgeInsets.only(right: 20,
-                left: 10),
+                left: 0),
             padding: EdgeInsets.only(
                 top: 10,
                 left: 10,
@@ -206,13 +222,14 @@ class _HomeState extends State<Home> {
                 decoration: BoxDecoration(
                     color: Color.fromRGBO(255, 255, 255, 1.0),
                   borderRadius: BorderRadius.circular(20),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.black38,
-                          blurRadius: 5,
-                          spreadRadius: 0
-                      )
-                    ]
+                  boxShadow: [
+                    BoxShadow(
+                        color: Color.fromRGBO(0, 0, 0, 0.15),
+                        spreadRadius: 0,
+                        blurRadius: 15,
+                        offset: Offset(0.1, 0.4)
+                    ),
+                  ],
 
                 ),
                 height: 100,

@@ -32,7 +32,8 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
         brightness: Brightness.light,
-        primaryColorDark: Colors.black
+        primaryColorDark: Colors.black,
+
       ),
       home: Home(),
     );

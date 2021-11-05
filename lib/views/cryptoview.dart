@@ -44,22 +44,23 @@ class _CryptoViewState extends State<CryptoView> {
         child:
       Container(
       margin: EdgeInsets.only(
-        top: 10,
-        right: 10,
-        bottom: 10,
+        top: 20,
+        right: 0,
+        bottom: 20,
         left: 10
       ),
       padding: EdgeInsets.only(
-        left: 10
+        left: 20
       ),
       width: 140,
-      height: 150,
+      height: 170,
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
-            color: Colors.black38,
-            spreadRadius: 1,
-            blurRadius: 5
+            color: Color.fromRGBO(0, 0, 0, 0.15),
+            spreadRadius: 0,
+            blurRadius: 15,
+            offset: Offset(0.1, 0.4)
           ),
         ],
         color: Color.fromRGBO(255, 255, 255, 1.0),
