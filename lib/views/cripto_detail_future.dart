@@ -60,32 +60,36 @@ class _CryptoDetailFutureState extends State<CryptoDetailFuture> {
   }
 
   Widget detalle(CriptoModel cripto){
-    final List<SalesData> chartData = [
-      SalesData(DateTime.fromMillisecondsSinceEpoch(widget.chartData.prices![0][0]),widget.chartData.prices![0][1]),
-      SalesData(DateTime.fromMillisecondsSinceEpoch(widget.chartData.prices![1][0]),widget.chartData.prices![1][1]),
-      SalesData(DateTime.fromMillisecondsSinceEpoch(widget.chartData.prices![2][0]), widget.chartData.prices![2][1]),
-      SalesData(DateTime.fromMillisecondsSinceEpoch(widget.chartData.prices![3][0]), widget.chartData.prices![3][1]),
-      SalesData(DateTime.fromMillisecondsSinceEpoch(widget.chartData.prices![4][0]), widget.chartData.prices![4][1]),
-      SalesData(DateTime.fromMillisecondsSinceEpoch(widget.chartData.prices![5][0]),widget.chartData.prices![5][1]),
-      SalesData(DateTime.fromMillisecondsSinceEpoch(widget.chartData.prices![6][0]), widget.chartData.prices![6][1]),
-      SalesData(DateTime.fromMillisecondsSinceEpoch(widget.chartData.prices![7][0]), widget.chartData.prices![7][1]),
-      SalesData(DateTime.fromMillisecondsSinceEpoch(widget.chartData.prices![8][0]),widget.chartData.prices![8][1]),
-      SalesData(DateTime.fromMillisecondsSinceEpoch(widget.chartData.prices![9][0]),widget.chartData.prices![9][1]),
-      SalesData(DateTime.fromMillisecondsSinceEpoch(widget.chartData.prices![10][0]), widget.chartData.prices![10][1]),
-      SalesData(DateTime.fromMillisecondsSinceEpoch(widget.chartData.prices![11][0]), widget.chartData.prices![11][1]),
-      SalesData(DateTime.fromMillisecondsSinceEpoch(widget.chartData.prices![12][0]), widget.chartData.prices![12][1]),
-      SalesData(DateTime.fromMillisecondsSinceEpoch(widget.chartData.prices![13][0]),widget.chartData.prices![13][1]),
-      SalesData(DateTime.fromMillisecondsSinceEpoch(widget.chartData.prices![14][0]), widget.chartData.prices![14][1]),
-      SalesData(DateTime.fromMillisecondsSinceEpoch(widget.chartData.prices![15][0]), widget.chartData.prices![15][1]),
-
-
+    List<SalesData> chartData = [
     ];
+    for(var a=0; a<widget.chartData.prices!.length;a++){
+      chartData.add(SalesData(DateTime.fromMillisecondsSinceEpoch(widget.chartData.prices![a][0]),widget.chartData.prices![a][1]));
+    }
     return Scaffold(
-        backgroundColor: Colors.black,
+        backgroundColor: Color.fromRGBO(250, 247, 255, 1.0),
         body:
 
         Container(
-          padding: EdgeInsets.all(20),
+          margin: EdgeInsets.only(top:50,
+              left: 20,
+              right: 20,
+              bottom: 20),
+          padding: EdgeInsets.only(
+              left: 20,
+              right: 20,
+              bottom: 20
+          ),
+          decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.black38,
+                    spreadRadius: 0,
+                    blurRadius: 5
+                ),
+              ],
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20)
+          ),
           child:
           ListView(
             children: [
@@ -104,7 +108,7 @@ class _CryptoDetailFutureState extends State<CryptoDetailFuture> {
                     ),
                     Text(cripto.name! +' ('+cripto.symbol!.toUpperCase()+')',
                       style: TextStyle(
-                        color: Colors.white,
+                        color: Colors.black,
                         fontWeight: FontWeight.bold,
                         fontFamily: 'Ubuntu',
                         fontSize: 40,
@@ -113,16 +117,17 @@ class _CryptoDetailFutureState extends State<CryptoDetailFuture> {
                 ),
               ),
               Container(
-                child: Text('Fecha de creacion:'+cripto.genesisDate!),
+                margin: EdgeInsets.only(top:15),
+                child: Text('Fecha de creacion:'+((cripto.genesisDate!.isEmpty)?cripto.genesisDate!:'No disponible')),
               ),
               Container(
-                child: Text('Precio actual (USD): ' +formateador.format(cripto.currentPriceUsd) +'\nPrecio actual(MXN):'+formateador.format(cripto.currentPriceMxn!)),
+                child: Text('\nPrecio actual (USD): ' +formateador.format(cripto.currentPriceUsd) +'\n\nPrecio actual(MXN):'+formateador.format(cripto.currentPriceMxn!)),
               ),
               Container(
-                margin: EdgeInsets.only(top: 10, bottom: 20),
+                margin: EdgeInsets.only(top: 20, bottom: 20),
                 child: Text('Grafica BTC/USD de los ultimos 15 dias',
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Colors.black,
                       fontWeight: FontWeight.w600,
                       fontFamily: 'Ubuntu',
                       fontSize: 15,
@@ -140,7 +145,7 @@ class _CryptoDetailFutureState extends State<CryptoDetailFuture> {
                       tooltipBehavior: TooltipBehavior(enable: true,
                       ),
                       palette: [
-                        Colors.green
+                        Colors.blue
                       ],
                       legend: Legend(
                           isVisible: false

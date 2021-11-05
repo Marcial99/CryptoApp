@@ -28,7 +28,7 @@ class _HomeState extends State<Home> {
   ApiGrafica? apiGrafica;
   ApiCriptomoneda? apiCriptomoneda;
   ApiTrending? apiTrending;
-
+  var num_trending;
   @override
   void initState() {
     // TODO: implement initState
@@ -40,7 +40,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Color.fromRGBO(250, 247, 255, 1.0),
       body: FutureBuilder(
 
         future: Future.wait([apiGrafica!.getChart('bitcoin'),apiCriptomoneda!.getCripto('bitcoin'),
@@ -53,8 +53,8 @@ class _HomeState extends State<Home> {
           apiGrafica!.getChart('polkadot'),apiCriptomoneda!.getCripto('polkadot'),
           apiGrafica!.getChart('dogecoin'),apiCriptomoneda!.getCripto('dogecoin'),
           apiGrafica!.getChart('shiba-inu'),apiCriptomoneda!.getCripto('shiba-inu'),
-          apiTrending!.getTrending()
-        ]),
+          apiTrending!.getTrending(),
+        ]).timeout(const Duration(seconds: 25)),
         builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
           if (snapshot.hasError){
             return Center(
@@ -62,7 +62,8 @@ class _HomeState extends State<Home> {
             );
           }else{
             if(snapshot.connectionState == ConnectionState.done){
-
+              num_trending = snapshot.data![20].length;
+              print(num_trending);
               return inicio(snapshot.data!);
             } else{
               return Center(child: CircularProgressIndicator());
@@ -88,11 +89,15 @@ class _HomeState extends State<Home> {
               margin: EdgeInsets.only(right: 20, left: 20, top:10),
               height: 50,
               decoration: BoxDecoration(
-                  color: Colors.white12,
+                  color: Colors.white,
                   borderRadius: BorderRadius.circular(40),
-                  border: Border.all(color: Colors.black),
+                  border: Border.all(color: Colors.white12),
                   boxShadow: [
-
+                    BoxShadow(
+                      color: Colors.black38,
+                      blurRadius: 5,
+                      spreadRadius: 0
+                    )
                   ]
               ),
               child: TextField(
@@ -120,7 +125,7 @@ class _HomeState extends State<Home> {
           margin: EdgeInsets.all(20),
           child: Text('Top 10 criptomonedas',
             style: TextStyle(
-                color: Colors.white,
+                color: Colors.black,
                 fontSize: 20,
                 fontFamily: 'Ubuntu',
                 fontWeight: FontWeight.bold
@@ -170,34 +175,18 @@ class _HomeState extends State<Home> {
     ),
         Container(
           padding: EdgeInsets.only(top: 360,
-          left: 20,
-          right: 20),
+          ),
 
           child: ListView.builder(
-            itemCount: 6,
+            itemCount: num_trending,
             itemBuilder: (context, index) {
               CryptoTrendingModel trend = data[20].elementAt(index);
-
+              print(trend);
               List<SalesData> chartData = [
-                SalesData(DateTime.fromMillisecondsSinceEpoch(trend.chart!.prices![0][0]),trend.chart!.prices![0][1]),
-                SalesData(DateTime.fromMillisecondsSinceEpoch(trend.chart!.prices![1][0]),trend.chart!.prices![1][1]),
-                SalesData(DateTime.fromMillisecondsSinceEpoch(trend.chart!.prices![2][0]), trend.chart!.prices![2][1]),
-                SalesData(DateTime.fromMillisecondsSinceEpoch(trend.chart!.prices![3][0]), trend.chart!.prices![3][1]),
-                SalesData(DateTime.fromMillisecondsSinceEpoch(trend.chart!.prices![4][0]), trend.chart!.prices![4][1]),
-                SalesData(DateTime.fromMillisecondsSinceEpoch(trend.chart!.prices![5][0]),trend.chart!.prices![5][1]),
-                SalesData(DateTime.fromMillisecondsSinceEpoch(trend.chart!.prices![6][0]), trend.chart!.prices![6][1]),
-                SalesData(DateTime.fromMillisecondsSinceEpoch(trend.chart!.prices![7][0]), trend.chart!.prices![7][1]),
-                SalesData(DateTime.fromMillisecondsSinceEpoch(trend.chart!.prices![8][0]),trend.chart!.prices![8][1]),
-                SalesData(DateTime.fromMillisecondsSinceEpoch(trend.chart!.prices![9][0]),trend.chart!.prices![9][1]),
-                SalesData(DateTime.fromMillisecondsSinceEpoch(trend.chart!.prices![10][0]), trend.chart!.prices![10][1]),
-                SalesData(DateTime.fromMillisecondsSinceEpoch(trend.chart!.prices![11][0]),trend.chart!.prices![11][1]),
-                SalesData(DateTime.fromMillisecondsSinceEpoch(trend.chart!.prices![12][0]), trend.chart!.prices![12][1]),
-                SalesData(DateTime.fromMillisecondsSinceEpoch(trend.chart!.prices![13][0]),trend.chart!.prices![13][1]),
-                SalesData(DateTime.fromMillisecondsSinceEpoch(trend.chart!.prices![14][0]), trend.chart!.prices![14][1]),
-                SalesData(DateTime.fromMillisecondsSinceEpoch(trend.chart!.prices![15][0]), trend.chart!.prices![15][1]),
-
-
               ];
+              for(var a=0; a<trend.chart!.prices!.length;a++){
+                chartData.add(SalesData(DateTime.fromMillisecondsSinceEpoch(trend.chart!.prices![a][0]),trend.chart!.prices![a][1]));
+              }
               return InkWell(
                 onTap: () {
                   Navigator.push(
@@ -210,10 +199,20 @@ class _HomeState extends State<Home> {
                 },
                   child:Container(
                 margin: EdgeInsets.only(bottom: 10,
+                  left: 20,
+                  right: 20
                 ),
+                padding: EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                    color: Color.fromRGBO(17, 17, 17, 1.0),
-                  borderRadius: BorderRadius.circular(20)
+                    color: Color.fromRGBO(255, 255, 255, 1.0),
+                  borderRadius: BorderRadius.circular(20),
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.black38,
+                          blurRadius: 5,
+                          spreadRadius: 0
+                      )
+                    ]
 
                 ),
                 height: 100,
@@ -267,7 +266,7 @@ class _HomeState extends State<Home> {
                       child: Container(
                         child: SfCartesianChart(
                             palette: [
-                              Colors.green
+                              Colors.blue
                             ],
                             legend: Legend(
                                 isVisible: false

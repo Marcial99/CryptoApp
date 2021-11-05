@@ -21,8 +21,9 @@ class ApiTrending {
       popular.map((moneda) => CryptoTrendingModel.fromMap(moneda['item'])).toList();
       for(var i=0;i<listaTrending.length;i++){
         listaTrending.elementAt(i).chart = await ApiGrafica().getChart(listaTrending.elementAt(i).id);
+        print(listaTrending.elementAt(i).chart!.prices);
       }
-      print(listaTrending.elementAt(0).chart);
+
 
       return listaTrending;
     } else {

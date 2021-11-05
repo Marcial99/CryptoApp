@@ -24,26 +24,11 @@ class _CryptoViewState extends State<CryptoView> {
 
   @override
   Widget build(BuildContext context) {
-    final List<SalesData> chartData = [
-      SalesData(DateTime.fromMillisecondsSinceEpoch(widget.chartData.prices![0][0]),widget.chartData.prices![0][1]),
-      SalesData(DateTime.fromMillisecondsSinceEpoch(widget.chartData.prices![1][0]),widget.chartData.prices![1][1]),
-      SalesData(DateTime.fromMillisecondsSinceEpoch(widget.chartData.prices![2][0]), widget.chartData.prices![2][1]),
-      SalesData(DateTime.fromMillisecondsSinceEpoch(widget.chartData.prices![3][0]), widget.chartData.prices![3][1]),
-      SalesData(DateTime.fromMillisecondsSinceEpoch(widget.chartData.prices![4][0]), widget.chartData.prices![4][1]),
-      SalesData(DateTime.fromMillisecondsSinceEpoch(widget.chartData.prices![5][0]),widget.chartData.prices![5][1]),
-      SalesData(DateTime.fromMillisecondsSinceEpoch(widget.chartData.prices![6][0]), widget.chartData.prices![6][1]),
-      SalesData(DateTime.fromMillisecondsSinceEpoch(widget.chartData.prices![7][0]), widget.chartData.prices![7][1]),
-      SalesData(DateTime.fromMillisecondsSinceEpoch(widget.chartData.prices![8][0]),widget.chartData.prices![8][1]),
-      SalesData(DateTime.fromMillisecondsSinceEpoch(widget.chartData.prices![9][0]),widget.chartData.prices![9][1]),
-      SalesData(DateTime.fromMillisecondsSinceEpoch(widget.chartData.prices![10][0]), widget.chartData.prices![10][1]),
-      SalesData(DateTime.fromMillisecondsSinceEpoch(widget.chartData.prices![11][0]), widget.chartData.prices![11][1]),
-      SalesData(DateTime.fromMillisecondsSinceEpoch(widget.chartData.prices![12][0]), widget.chartData.prices![12][1]),
-      SalesData(DateTime.fromMillisecondsSinceEpoch(widget.chartData.prices![13][0]),widget.chartData.prices![13][1]),
-      SalesData(DateTime.fromMillisecondsSinceEpoch(widget.chartData.prices![14][0]), widget.chartData.prices![14][1]),
-      SalesData(DateTime.fromMillisecondsSinceEpoch(widget.chartData.prices![15][0]), widget.chartData.prices![15][1]),
-
-
+    List<SalesData> chartData = [
     ];
+    for(var a=0; a<widget.chartData.prices!.length;a++){
+      chartData.add(SalesData(DateTime.fromMillisecondsSinceEpoch(widget.chartData.prices![a][0]),widget.chartData.prices![a][1]));
+    }
     return
       InkWell(
         onTap: () {
@@ -77,7 +62,7 @@ class _CryptoViewState extends State<CryptoView> {
             blurRadius: 5
           ),
         ],
-        color: Color.fromRGBO(17, 17, 17, 1.0),
+        color: Color.fromRGBO(255, 255, 255, 1.0),
         borderRadius: BorderRadius.circular(20)
       ),
       child:
@@ -122,7 +107,7 @@ class _CryptoViewState extends State<CryptoView> {
                         child:
                         SfCartesianChart(
                             palette: [
-                              Colors.green
+                              Colors.blue
                             ],
                             legend: Legend(
                                 isVisible: false
