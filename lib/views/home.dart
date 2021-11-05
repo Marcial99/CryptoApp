@@ -128,10 +128,10 @@ class _HomeState extends State<Home> {
                 },
                 decoration: InputDecoration(
                     border: InputBorder.none,
-                    hintText: 'Buscar criptomoneda',
-                    prefixIcon: Icon(
+                    hintText: '  Buscar criptomoneda',
+                    suffixIcon: Icon(
                       Icons.search,
-                      color: Colors.white,
+                      color: Colors.black,
                       size: 25,
                     )),
               ),
