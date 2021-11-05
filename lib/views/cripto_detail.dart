@@ -92,7 +92,7 @@ class _CryptoDetailState extends State<CryptoDetail> {
               ),
                 Container(
                   margin: EdgeInsets.only(top: 30, bottom: 20),
-                  child: Text('Grafica BTC/USD de los ultimos 15 dias',
+                  child: Text('Grafica BTC/USD de los ultimos '+widget.chartData.prices!.length.toString()+' dias',
                       style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.w600,

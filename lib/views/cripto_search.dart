@@ -135,7 +135,7 @@ class _CryptoSearchState extends State<CryptoSearch> {
               ),
               Container(
                 margin: EdgeInsets.only(top: 20, bottom: 20),
-                child: Text('Grafica BTC/USD de los ultimos 15 dias',
+                child: Text('Grafica BTC/USD de los ultimos '+data[1].prices!.length.toString()+' dias',
                     style: TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.w600,
